@@ -35,7 +35,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = (
             'product_name',
             'product_price',
-            'quantity'
+            'quantity',
+            'item_subtotal'
         )
         
 
