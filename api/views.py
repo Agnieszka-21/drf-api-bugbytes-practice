@@ -16,7 +16,7 @@ from api.models import Product, Order
 
 
 class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(stock__gt=0)
     serializer_class = ProductSerializer
 
 
@@ -33,12 +33,17 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
     lookup_url_kwarg = 'product_id'
 
 
-@api_view(['GET'])
-def order_list(request):
-    # optimized based on django-silk data: prefetch
-    orders = Order.objects.prefetch_related('items__product')
-    serializer = OrderSerializer(orders, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def order_list(request):
+#     # optimized based on django-silk data: prefetch
+#     orders = Order.objects.prefetch_related('items__product')
+#     serializer = OrderSerializer(orders, many=True)
+#     return Response(serializer.data)
+
+
+class OrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.prefetch_related('items__product')
+    serializer_class = OrderSerializer
 
 
 @api_view(['GET'])
