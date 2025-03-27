@@ -10,26 +10,10 @@ from api.serializers import ProductSerializer, OrderSerializer, ProductInfoSeria
 from api.models import Product, Order
 
 
-# @api_view(['GET'])
-# def product_list(request):
-#     products = Product.objects.all()
-#     serializer = ProductSerializer(products, many=True)
-#     return Response(serializer.data)
-
-
-class ProductListAPIView(generics.ListAPIView):
+# GET and POST data - list and create products - ListCreateAPIView
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
-
-class ProductCreateAPIView(generics.CreateAPIView):
-    model = Product
-    serializer_class = ProductSerializer
-
-    # Overwrite generic create() method in order to print data
-    def create(self, request, *args, **kwargs):
-        print(request.data)
-        return super().create(request, *args, **kwargs)
 
 
 # @api_view(['GET'])
