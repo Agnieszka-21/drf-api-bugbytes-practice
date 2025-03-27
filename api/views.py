@@ -26,6 +26,11 @@ class ProductCreateAPIView(generics.CreateAPIView):
     model = Product
     serializer_class = ProductSerializer
 
+    # Overwrite generic create() method in order to print data
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        return super().create(request, *args, **kwargs)
+
 
 # @api_view(['GET'])
 # def product_detail(request, pk):
