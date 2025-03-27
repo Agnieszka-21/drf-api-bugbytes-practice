@@ -18,7 +18,12 @@ from api.models import Product, Order
 
 
 class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.filter(stock__gt=0)
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductCreateAPIView(generics.CreateAPIView):
+    model = Product
     serializer_class = ProductSerializer
 
 
