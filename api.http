@@ -1,6 +1,26 @@
 GET http://127.0.0.1:8000/products/ HTTP/1.1
 
 ###
+GET http://127.0.0.1:8000/products/1/ HTTP/1.1
+
+
+###
+DELETE http://127.0.0.1:8000/products/1/ HTTP/1.1
+
+
+###
+PUT http://127.0.0.1:8000/products/1/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Television",
+    "price": 555.99,
+    "stock": 10,
+    "description": "An amazing new TV"
+}
+
+
+###
 POST http://127.0.0.1:8000/products/ HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzMTk2NTA4LCJpYXQiOjE3NDMxOTYyMDgsImp0aSI6IjVhOWYxZjZlM2NhNTRhZDE5ZjNiZjZiNTFiY2VhZGQ5IiwidXNlcl9pZCI6Mn0.aFFuCRGYsBzpaNLcfbr0fJYzyaQfv3qM_efsEtngDjY

@@ -33,7 +33,13 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 #     return Response(serializer.data)
 
 
-class ProductDetailAPIView(generics.RetrieveAPIView):
+# class ProductDetailAPIView(generics.RetrieveAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+#     lookup_url_kwarg = 'product_id'
+
+
+class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_url_kwarg = 'product_id'
