@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'api',
     'rest_framework',
     'silk',
     'drf_spectacular',
+    'django_filters',
+    # Custom apps
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +141,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.RestFrameworkFilterBackend', ...
+    )
 }
 
 SPECTACULAR_SETTINGS = {
