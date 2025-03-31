@@ -12,7 +12,11 @@ from rest_framework.views import APIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
+from .serializers import (
+    ProductSerializer,
+    OrderSerializer,
+    ProductInfoSerializer
+)
 from .models import Product, Order
 from .filters import ProductFilter
 
@@ -23,8 +27,13 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     # filterset_fields = ('name', 'price')  # Exact lookup
     filterset_class = ProductFilter
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['name', 'description']
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter
+    ]
+    search_fields = ['=name', 'description']  # Add = for exact match
+    ordering_fields = ['name', 'price', 'stock']
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
