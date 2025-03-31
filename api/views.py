@@ -10,15 +10,17 @@ from rest_framework.permissions import (
 )
 from rest_framework.views import APIView
 
-from api.serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
-from api.models import Product, Order
+from .serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
+from .models import Product, Order
+from .filters import ProductFilter
 
 
 # GET and POST data - list and create products - ListCreateAPIView
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filterset_fields = ('name', 'price')
+    # filterset_fields = ('name', 'price')
+    filterset_class = ProductFilter
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
