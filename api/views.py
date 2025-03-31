@@ -9,6 +9,8 @@ from rest_framework.permissions import (
     AllowAny
 )
 from rest_framework.views import APIView
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
 from .models import Product, Order
@@ -19,8 +21,10 @@ from .filters import ProductFilter
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # filterset_fields = ('name', 'price')
+    # filterset_fields = ('name', 'price')  # Exact lookup
     filterset_class = ProductFilter
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['name', 'description']
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
