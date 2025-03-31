@@ -18,7 +18,7 @@ from .serializers import (
     ProductInfoSerializer
 )
 from .models import Product, Order
-from .filters import ProductFilter
+from .filters import ProductFilter, InStockFilterBackend
 
 
 # GET and POST data - list and create products - ListCreateAPIView
@@ -30,7 +30,8 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        InStockFilterBackend,
     ]
     search_fields = ['=name', 'description']  # Add = for exact match
     ordering_fields = ['name', 'price', 'stock']
