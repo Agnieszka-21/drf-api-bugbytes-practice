@@ -11,7 +11,7 @@ from rest_framework.permissions import (
 from rest_framework.views import APIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.pagination import PageNumberPagination
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
 from .serializers import (
     ProductSerializer,
@@ -36,11 +36,13 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     ]
     search_fields = ['=name', 'description']  # Add = for exact match
     ordering_fields = ['name', 'price', 'stock']
-    pagination_class = PageNumberPagination
-    pagination_class.page_size = 2
-    pagination_class.page_query_param = 'pagenum'
-    pagination_class.page_size_query_param = 'size'
-    pagination_class.max_page_size = 6
+    # pagination_class = PageNumberPagination
+    # pagination_class.page_size = 2
+    # pagination_class.page_query_param = 'pagenum'
+    # pagination_class.page_size_query_param = 'size'
+    # pagination_class.max_page_size = 6
+    pagination_class = LimitOffsetPagination
+
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
