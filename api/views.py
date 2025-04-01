@@ -38,6 +38,9 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     ordering_fields = ['name', 'price', 'stock']
     pagination_class = PageNumberPagination
     pagination_class.page_size = 2
+    pagination_class.page_query_param = 'pagenum'
+    pagination_class.page_size_query_param = 'size'
+    pagination_class.max_page_size = 6
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
