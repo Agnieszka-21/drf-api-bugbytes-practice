@@ -11,6 +11,7 @@ from rest_framework.permissions import (
 from rest_framework.views import APIView
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
 
 from .serializers import (
     ProductSerializer,
@@ -23,7 +24,7 @@ from .filters import ProductFilter, InStockFilterBackend
 
 # GET and POST data - list and create products - ListCreateAPIView
 class ProductListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.order_by('pk')
     serializer_class = ProductSerializer
     # filterset_fields = ('name', 'price')  # Exact lookup
     filterset_class = ProductFilter
@@ -35,6 +36,8 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     ]
     search_fields = ['=name', 'description']  # Add = for exact match
     ordering_fields = ['name', 'price', 'stock']
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 2
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
