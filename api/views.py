@@ -103,6 +103,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
     permission_classes = [AllowAny]
+    pagination_class = None
 
 
 # @api_view(['GET'])
