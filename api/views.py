@@ -95,7 +95,7 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     pagination_class = None
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
@@ -104,7 +104,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             detail=False,
             methods=['get'],
             url_path='user-orders',
-            permission_classes=['IsAuthenticated']
     )
     def user_order(self, request):
         orders = self.get_queryset().filter(user=request.user)
