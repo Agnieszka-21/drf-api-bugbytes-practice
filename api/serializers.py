@@ -38,6 +38,23 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'quantity',
             'item_subtotal'
         )
+
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class OrderItemCreateSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = OrderItem
+            fields = ('product', 'quantity')
+
+    items = OrderItemCreateSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = (
+            'user',
+            'status',
+            'items',
+        )
         
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -54,7 +71,8 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = (
             'order_id',
             'created_at',
-            'user', 'status',
+            'user',
+            'status',
             'items',
             'total_price'
         )

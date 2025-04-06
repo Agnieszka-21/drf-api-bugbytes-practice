@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from .filters import InStockFilterBackend, OrderFilter, ProductFilter
 from .models import Order, Product
 from .serializers import (OrderSerializer, ProductInfoSerializer,
-                          ProductSerializer)
+                          ProductSerializer, OrderCreateSerializer)
 
 
 # GET and POST data - list and create products - ListCreateAPIView
