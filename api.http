@@ -71,3 +71,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
     and further JSON details to create the order...
 }
 
+
+###
+DELETE http://127.0.0.1:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzMzU5NzU3LCJpYXQiOjE3NDMzNTkzMzQsImp0aSI6IjQxN2ZhODE4YTQzNjRhZmM4YjBiNmJjYTZjMGM4NWViIiwidXNlcl9pZCI6Mn0.0fONIt4JA2QbDDTWAiSYGHfgPz645B7T1Ly-B9araVQ
+
+
