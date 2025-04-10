@@ -152,7 +152,6 @@ REST_FRAMEWORK = {
         # 'rest_framework.throttling.BurstRateThrottle',
         # 'rest_framework.throttling.SustainedRateThrottle',
         # 'rest_framework.throttling.ScopedRateThrottle'
-
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '2/minute',
