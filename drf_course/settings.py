@@ -148,9 +148,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 5,
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
+        # 'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.BurstRateThrottle',
+        'rest_framework.throttling.SustainedRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '2/minute',
+        # 'user': '3/minute',
+        'burst': '10/minute',
+        'sustained': '15/hour'
     }
 }
 
