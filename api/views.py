@@ -10,6 +10,7 @@ from rest_framework.pagination import (LimitOffsetPagination,
                                        PageNumberPagination)
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.views import APIView
 
 from .filters import InStockFilterBackend, OrderFilter, ProductFilter
@@ -22,6 +23,7 @@ from .serializers import (OrderSerializer, ProductInfoSerializer,
 # GET and POST data - list and create products - ListCreateAPIView
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     throttle_scope = 'products'
+    throttle_classes = [ScopedRateThrottle]
     queryset = Product.objects.order_by('pk')
     serializer_class = ProductSerializer
     # filterset_fields = ('name', 'price')  # Exact lookup
