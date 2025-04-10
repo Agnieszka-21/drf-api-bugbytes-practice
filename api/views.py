@@ -18,6 +18,7 @@ from .models import Order, Product, User
 from .serializers import (OrderSerializer, ProductInfoSerializer,
                           ProductSerializer, OrderCreateSerializer,
                           UserSerializer)
+from .tasks import send_order_confirmation_email
 
 
 # GET and POST data - list and create products - ListCreateAPIView
@@ -123,7 +124,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        send_order_confirmation_email.delay(order.order_id, self.request.user.email)
 
     def get_serializer_class(self):
         # alternative to the code below: if self.request.method == 'POST'
