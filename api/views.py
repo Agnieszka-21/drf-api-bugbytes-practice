@@ -21,6 +21,7 @@ from .serializers import (OrderSerializer, ProductInfoSerializer,
 
 # GET and POST data - list and create products - ListCreateAPIView
 class ProductListCreateAPIView(generics.ListCreateAPIView):
+    throttle_scope = 'products'
     queryset = Product.objects.order_by('pk')
     serializer_class = ProductSerializer
     # filterset_fields = ('name', 'price')  # Exact lookup
@@ -105,6 +106,7 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    throttle_scope = 'orders'
     queryset = Order.objects.prefetch_related('items__product')
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
