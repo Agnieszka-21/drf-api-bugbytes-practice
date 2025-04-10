@@ -185,3 +185,12 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+# Connect Celery to Redis (its broker) - same URL as in CACHES; required URL
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/1"
+
+# Store results from Celery tasks in Redis
+# CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/1"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
